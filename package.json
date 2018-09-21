@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Error on controller handler plugin for egg",
   "eggPlugin": {
-    "name": "errorHandler"
+    "name": "errorHandler",
+    "dependencies": ["response"]
   },
   "keywords": [
     "egg",
