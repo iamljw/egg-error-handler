@@ -2,9 +2,11 @@
 
 module.exports = (options, app) => {
     return async function errorHandler(ctx, next) {
+        let error;
         try {
             await next();
         } catch (err) {
+            error = err;
             const config = app.config.errorHandler2;
             const message = err.message || err;
             if (!config.protection) {
@@ -29,8 +31,9 @@ module.exports = (options, app) => {
                 } else {
                     ctx.failed(config.tips);
                 }
-                app.emit('error', err, ctx);
             }
+        } finally {
+            app.emit('error', error, ctx);
         }
     };
 };
