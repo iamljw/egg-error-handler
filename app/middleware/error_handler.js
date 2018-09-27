@@ -33,7 +33,9 @@ module.exports = (options, app) => {
                 }
             }
         } finally {
-            app.emit('error', error, ctx);
+            if (error) {
+                app.emit('error', error, ctx);
+            }
         }
     };
 };
