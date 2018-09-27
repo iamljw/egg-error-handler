@@ -9,7 +9,7 @@ module.exports = (options, app) => {
             error = err;
             const config = app.config.errorHandler2;
             const message = err.message || err;
-            if (!config.protection || !config) {
+            if (!config || !config.protection) {
                 ctx.failed(message);
             } else {
                 if (app.config.env !== 'prod') {
