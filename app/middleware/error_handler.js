@@ -10,26 +10,26 @@ module.exports = (options, app) => {
             const config = app.config.errorHandler2;
             const message = err.message || err;
             if (!config || !config.protection) {
-                ctx.failed(message);
+                ctx.failed({ message });
             } else {
                 if (app.config.env !== 'prod') {
-                    ctx.failed(message);
+                    ctx.failed({ message });
                     return;
                 }
                 if (typeof err === 'string') {
-                    ctx.failed(message);
+                    ctx.failed({ message });
                     return;
                 }
                 for (const item of config.ignore) {
                     if (err instanceof item) {
-                        ctx.failed(err.name + ':' + message);
+                        ctx.failed({ message: err.name + ':' + message });
                         return;
                     }
                 }
                 if (!config.tips) {
-                    ctx.failed('Internal Server Error');
+                    ctx.failed({ message: 'Internal Server Error' });
                 } else {
-                    ctx.failed(config.tips);
+                    ctx.failed({ message: config.tips });
                 }
             }
         } finally {
