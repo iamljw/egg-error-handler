@@ -9,19 +9,25 @@ module.exports = (options, app) => {
             error = err;
             const config = app.config.errorHandler2;
             const message = err.message || err;
+            if (err.code === 'invalid_param') {
+                ctx.failed({ message: err.errors });
+                return;
+            }
             if (!config || !config.protection) {
                 ctx.failed({ message });
             } else {
                 if (app.config.env !== 'prod') {
                     ctx.failed({ message });
+                    for (const item of config.ignore) {
+                        if (err instanceof item) {
+                            return;
+                        }
+                    }
+                    app.emit('error', error, ctx);
                     return;
                 }
                 if (typeof err === 'string') {
                     ctx.failed({ message });
-                    return;
-                }
-                if (err.code === 'invalid_param') {
-                    ctx.failed({ message: err.errors });
                     return;
                 }
                 for (const item of config.ignore) {
