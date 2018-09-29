@@ -20,6 +20,10 @@ module.exports = (options, app) => {
                     ctx.failed({ message });
                     return;
                 }
+                if (err.code === 'invalid_param') {
+                    ctx.failed({ message: err.errors });
+                    return;
+                }
                 for (const item of config.ignore) {
                     if (err instanceof item) {
                         ctx.failed({ message: err.name + ':' + message });
@@ -31,9 +35,6 @@ module.exports = (options, app) => {
                 } else {
                     ctx.failed({ message: config.tips });
                 }
-            }
-        } finally {
-            if (error) {
                 app.emit('error', error, ctx);
             }
         }
