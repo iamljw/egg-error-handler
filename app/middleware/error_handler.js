@@ -23,7 +23,6 @@ module.exports = (options, app) => {
                             return;
                         }
                     }
-                    app.emit('error', error, ctx);
                     return;
                 }
                 if (typeof err === 'string') {
@@ -41,8 +40,9 @@ module.exports = (options, app) => {
                 } else {
                     ctx.failed({ message: config.tips });
                 }
-                app.emit('error', error, ctx);
             }
+        } finally {
+            app.emit('error', error, ctx);
         }
     };
 };
