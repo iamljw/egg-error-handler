@@ -1,6 +1,6 @@
 {
   "name": "egg-error-handler",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Error on controller handler plugin for egg",
   "eggPlugin": {
     "name": "errorHandler",
