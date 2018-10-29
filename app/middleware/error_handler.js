@@ -18,11 +18,6 @@ module.exports = (options, app) => {
             } else {
                 if (app.config.env !== 'prod') {
                     ctx.failed({ message });
-                    for (const item of config.ignore) {
-                        if (err instanceof item) {
-                            return;
-                        }
-                    }
                     return;
                 }
                 if (typeof err === 'string') {
