@@ -26,7 +26,7 @@ module.exports = (options, app) => {
                 }
                 for (const item of config.ignore) {
                     if (err instanceof item) {
-                        ctx.failed({ message: err.name + ':' + message });
+                        ctx.failed({ message });
                         return;
                     }
                 }
