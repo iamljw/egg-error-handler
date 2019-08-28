@@ -1,5 +1,7 @@
 # egg-error-handler
 
+[English](./README.md)|中文
+
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -55,6 +57,7 @@ exports.errorHandler = {
 
 ```json
 {
+    "code": 400,
     "success": false,
     "message": "NotFoundError:找不到你想要的"
 }

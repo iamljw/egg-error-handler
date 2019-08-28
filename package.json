@@ -1,7 +1,7 @@
 {
   "name": "egg-error-handler",
-  "version": "2.2.0",
-  "description": "Error on controller handler plugin for egg",
+  "version": "2.2.1",
+  "description": "Error capture on controller handler plugin for egg",
   "eggPlugin": {
     "name": "errorHandler",
     "dependencies": [
@@ -12,13 +12,15 @@
     "egg",
     "eggPlugin",
     "egg-plugin",
+    "request",
     "error",
+    "exception",
     "handler",
     "controller",
     "middleware"
   ],
   "dependencies": {
-    "egg-response": "^1.8.0"
+    "egg-response": "^1.8.1"
   },
   "devDependencies": {
     "autod": "^3.0.0",

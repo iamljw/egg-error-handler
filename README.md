@@ -1,5 +1,7 @@
 # egg-error-handler
 
+English|[中文](./README.zh_CN.md)
+
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -46,8 +48,9 @@ exports.errorHandler = {
 
 ```json
 {
-     "success": false,
-     "message": "NotFoundError: Can't find what you want"
+    "code": 400,
+    "success": false,
+    "message": "NotFoundError: Can't find what you want"
 }
 ```
 

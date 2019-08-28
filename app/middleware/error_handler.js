@@ -8,32 +8,34 @@ module.exports = (options, app) => {
         } catch (err) {
             error = err;
             const config = app.config.errorHandler2;
+            const { code } = err;
             const message = err.message || err;
+            const body = { code, message };
             if (err.code === 'invalid_param') {
-                ctx.failed({ message: err.errors });
+                ctx.failed({ code: 2001, message: err.errors });
                 return;
             }
             if (!config || !config.protection) {
-                ctx.failed({ message });
+                ctx.failed(body);
             } else {
                 if (app.config.env !== 'prod') {
-                    ctx.failed({ message });
+                    ctx.failed(body);
                     return;
                 }
                 if (typeof err === 'string') {
-                    ctx.failed({ message });
+                    ctx.failed(body);
                     return;
                 }
-                for (const item of config.ignore) {
-                    if (err instanceof item) {
-                        ctx.failed({ message });
+                for (const CustomError of config.ignore) {
+                    if (err instanceof CustomError) {
+                        ctx.failed(body);
                         return;
                     }
                 }
                 if (!config.tips) {
-                    ctx.failed({ message: 'Internal Server Error' });
+                    ctx.failed({ code: 500, message: 'Internal Server Error' });
                 } else {
-                    ctx.failed({ message: config.tips });
+                    ctx.failed({ code: 500, message: config.tips });
                 }
             }
         } finally {
